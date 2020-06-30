@@ -1,0 +1,10 @@
+[package]
+name = "webhook_error_reporter"
+version = "0.1.0"
+authors = ["thinkier <26728734+thinkier@users.noreply.github.com>"]
+edition = "2018"
+
+
+[features]
+# Built in backtracing is feature-gated because it's still unstable on rust's end
+backtrace=[]
