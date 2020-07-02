@@ -20,7 +20,12 @@ Reports your rust errors to a webhook to your favourite chat service.
 
 #[tokio::main]
 async fn main<E: Error>() -> Result<(), ReportableError<E>> {
-    Err(/* "Paint it red" */)
+    error_factory()
+}
+
+#[webhook_report_error]
+fn error_factory<E: Error>() -> Result<(), ReportableError<E>> {
+    Err(/* Your error */.into())
 }
 ```
 
