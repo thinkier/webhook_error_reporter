@@ -25,12 +25,19 @@ impl Display for CustomError {
 }
 
 #[webhook_report_error]
-async fn yikes_on_bikes<'a, F: Fn() -> &'a str>(f: F) -> Result<(), ReportableError<CustomError>> {
+async fn yikes_on_bikes<'a, F: Fn() -> &'a str>(f: F) -> Result<(), ReportableError<Box<dyn Error>>> {
 	let message = async {
 		f().to_string()
 	}.await;
 
-	Err(CustomError { message, trace: Backtrace::capture() })
+	let err = CustomError {
+		message,
+		trace: Backtrace::capture(),
+	};
+
+	Err(Box::new(err))?;
+
+	Ok(())
 }
 
 #[test]

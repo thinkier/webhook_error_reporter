@@ -19,12 +19,12 @@ Reports your rust errors to a webhook to your favourite chat service.
 #![feature(backtrace)]
 
 #[tokio::main]
-async fn main<E: Error>() -> Result<(), ReportableError<E>> {
+async fn main() -> Result<(), ReportableError<Box<dyn Error>>> {
     error_factory().await
 }
 
 #[webhook_report_error]
-async fn error_factory<E: Error>() -> Result<(), ReportableError<E>> {
+async fn error_factory() -> Result<(), ReportableError<Box<dyn Error>>> {
     Err(/* Your error */.into())
 }
 ```

@@ -20,7 +20,7 @@ const BACKTRACE_NOT_SUPPORTED: &str = "(Backtrace is not supported.)";
 const BACKTRACE_NOT_IMPLEMENTED: &str = "(Backtrace is not implemented by the error type.)";
 const BACKTRACE_DISABLED: &str = "RUST_BACKTRACE must be set to `1` or `full` for the backtrace to be captured.";
 
-pub async fn report<E: Error + 'static>(cause: E, webhook: &str) -> ReportableError<E> {
+pub async fn report(cause: Box<dyn Error>, webhook: &str) -> ReportableError<Box<dyn Error>> {
 	let fut = async {
 		let https = HttpsConnector::new();
 		let client = Client::builder().build::<_, hyper::Body>(https);
@@ -74,7 +74,7 @@ pub async fn report<E: Error + 'static>(cause: E, webhook: &str) -> ReportableEr
 		Ok(())
 	}.await;
 
-	let mut wrapper: ReportableError<E> = cause.into();
+	let mut wrapper: ReportableError<_> = cause.into();
 
 	if let Err(re) = fut {
 		wrapper.reporter_error = Some(re);

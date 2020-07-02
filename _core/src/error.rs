@@ -20,7 +20,7 @@ impl<E: Error> Display for ReportableError<E> {
 	}
 }
 
-impl<E: Error + 'static> From<E> for ReportableError<E> {
+impl<E> From<E> for ReportableError<E> {
 	fn from(cause: E) -> Self {
 		ReportableError {
 			cause,
