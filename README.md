@@ -20,11 +20,11 @@ Reports your rust errors to a webhook to your favourite chat service.
 
 #[tokio::main]
 async fn main<E: Error>() -> Result<(), ReportableError<E>> {
-    error_factory()
+    error_factory().await
 }
 
 #[webhook_report_error]
-fn error_factory<E: Error>() -> Result<(), ReportableError<E>> {
+async fn error_factory<E: Error>() -> Result<(), ReportableError<E>> {
     Err(/* Your error */.into())
 }
 ```
