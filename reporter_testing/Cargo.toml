@@ -1,0 +1,15 @@
+[package]
+name = "reporter_testing"
+version = "0.1.0"
+authors = ["thinkier <26728734+thinkier@users.noreply.github.com>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies.webhook_error_reporter]
+path="../"
+features=["split_msg"]
+
+[dependencies.tokio]
+version="^0.2.21"
+features=["full"]

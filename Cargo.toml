@@ -4,7 +4,11 @@ version = "0.1.0"
 authors = ["thinkier <26728734+thinkier@users.noreply.github.com>"]
 edition = "2018"
 
+[dependencies.webhook_error_reporter_core]
+path="_core"
+
+[dependencies.webhook_error_reporter_macro]
+path="_macro"
 
 [features]
-# Built in backtracing is feature-gated because it's still unstable on rust's end
-backtrace=[]
+split_msg=["webhook_error_reporter_core/split_msg"]

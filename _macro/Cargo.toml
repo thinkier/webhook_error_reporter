@@ -14,7 +14,3 @@ quote="^1.0.7"
 [dependencies.syn]
 version="^1.0.33"
 features=["full"]
-
-[features]
-# Built in backtracing is feature-gated because it's still unstable on rust's end
-backtrace=[]
