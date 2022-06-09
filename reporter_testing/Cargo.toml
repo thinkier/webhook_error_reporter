@@ -11,5 +11,5 @@ path="../"
 features=["split_msg"]
 
 [dependencies.tokio]
-version="^0.2.21"
+version="^1.8.4"
 features=["full"]
